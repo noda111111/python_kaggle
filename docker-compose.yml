@@ -1,0 +1,11 @@
+version: '3'                       # Docker Composeのバージョンを指定。version: '3'は一般的に使われる
+services:                          # コンテナで実行する複数のサービスを定義のセクション
+  jupyter:                         # jupyterが定義。各サービスは独立したコンテナとして動作
+    build: .                       # 現在のディレクトリ（.）にあるDockerfileを使ってDockerイメージをビルド
+    ports:
+      - "8888:8888"                # Jupyter Notebookをホストの8888ポート。ホストマシンとコンテナ間のネットワーク通信を設定
+    volumes:                       # ホストマシンとコンテナの間でファイルを共有するための設定
+      - ./data:/app/data           # データディレクトリをマウント。ホストマシンのdataディレクトリをコンテナ内の/app/dataディレクトリに繋ぐ
+      - ./notebooks:/app/notebooks # ノートブックファイルをマウント。ホストマシンのnotebooksディレクトリをコンテナ内の/app/notebooksディレクトリに繋ぐ
+
+
